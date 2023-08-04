@@ -54,6 +54,17 @@ jobs:
       - name: setup go
         uses: actions/setup-go@v3
 
+      # Cache Go build cache and modcache
+      - name: cache deps
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
       # Runs Go tests
       - name: test
         run: go test ./...
