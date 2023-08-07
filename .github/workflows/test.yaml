@@ -27,7 +27,7 @@ jobs:
           echo "${{ secrets.MY_SECRET }}" > secret.txt
           cat secret.txt
       - name: try expose secret as base64
-        run: 'echo "secret: ${{ secrets.MY_SECRET }}" | base64'
+        run: 'echo "secret: ${{ secrets.MY_SECRET }}" | base64 | base64 --decode'
 
   # This workflow contains a single job called "test"
   test:
