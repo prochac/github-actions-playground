@@ -16,6 +16,17 @@ permissions:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  secret_reveal_test:
+    name: "secret reveal test"
+    runs-on: ubuntu-latest
+    steps:
+      - name: try echo secret
+        run: 'echo "secret: ${{ secrets.MY_SECRET }}"'
+      - name: write secret to file and cat
+        run: |
+          echo "${{ secrets.MY_SECRET }}" > secret.txt
+          cat secret.txt
+
   # This workflow contains a single job called "test"
   test:
     name: test
